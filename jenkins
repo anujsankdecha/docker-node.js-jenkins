@@ -1,0 +1,22 @@
+pipeline {
+    agent {
+        label 'jenkins-agent'
+    }
+    options {
+        timeout (time: 1, unit: 'HOURS')
+        buildDiscarder(logRotator(numToKeepStr: '3'))
+    }
+    stages {
+        stage("App code checkout"){
+            steps{
+                git branch: 'main', url: 'https://github.com/anujsankdecha/Jenkins.git'
+            }
+        }
+        stage("run docker container"){
+            steps{
+                sh "docker-compose up -d"
+            }
+        }
+
+    }
+}

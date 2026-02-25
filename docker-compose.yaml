@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: anuj
+      POSTGRES_PASSWORD: anuj
+      POSTGRES_DB: anuj_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: postgres
+      DB_USER: anuj
+      DB_PASSWORD: anuj
+      DB_NAME: anuj_db
+    depends_on:
+      - database
+
+volumes:
+  postgres_data:
