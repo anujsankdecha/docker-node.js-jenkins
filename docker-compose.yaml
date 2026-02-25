@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   postgres:
     image: postgres:latest
@@ -20,7 +22,7 @@ services:
       DB_PASSWORD: anuj
       DB_NAME: anuj_db
     depends_on:
-      - database
+      - postgres
 
 volumes:
   postgres_data:
